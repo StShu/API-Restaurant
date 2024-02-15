@@ -1,4 +1,4 @@
-namespace API_Restaurant.Model
+namespace API_Restaurant.Data.Model
 {
     public class WeatherForecast
     {

@@ -1,4 +1,4 @@
-﻿namespace API_Restaurant.Model
+﻿namespace API_Restaurant.Data.Model
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;

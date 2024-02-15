@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace API_Restaurant.Model
+namespace API_Restaurant.Data.Model
 {
     public interface IEntity
     {

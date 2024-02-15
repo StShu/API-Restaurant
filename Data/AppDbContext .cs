@@ -1,9 +1,9 @@
-﻿using API_Restaurant.Model;
+﻿using API_Restaurant.Data.Model;
 using Microsoft.EntityFrameworkCore;
 
 namespace API_Restaurant.Data
 {
-   
+
     public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
