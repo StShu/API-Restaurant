@@ -2,6 +2,7 @@
 {
     public class DetailsResponse
     {
-        public required Data.Model.Menu Menu { get; set; }
+        public required Data.Model.Menu? Menu { get; set; }
+
     }
 }

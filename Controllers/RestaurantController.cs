@@ -17,11 +17,15 @@ namespace API_Restaurant.Controllers
             _repository = repository;
         }
 
-        [HttpGet("{name}")]
+        [HttpGet("{code}")]
 
-        public async Task<ActionResult<DetailsResponse>> Details(string name)
+        public async Task<ActionResult<DetailsResponse>> Details(string code)
         {
-            return new DetailsResponse { Restaurant = await _repository.GetMany(r => r.Name == name).FirstOrDefaultAsync() };
+            return new DetailsResponse
+            {
+                
+                Restaurant = await _repository.GetMany(r => r.Code == code).Include(m=>m.Menues).FirstOrDefaultAsync()
+            };
         }
     }
 }

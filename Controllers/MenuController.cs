@@ -3,10 +3,11 @@ using API_Restaurant.Models.Menu;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace API_Restaurant.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/{restaurantCode}/[controller]")]
     [ApiController]
     public class MenuController : ControllerBase
     {
@@ -17,10 +18,17 @@ namespace API_Restaurant.Controllers
             _repository = repository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<DetailsResponse>> Details(string code)
+        [HttpGet("{code}")]
+        public async Task<ActionResult<DetailsResponse>> Details(string restaurantCode, string code)
         {
-            return new DetailsResponse { Menu = await _repository.GetMany(r => r.Code == code).FirstOrDefaultAsync() };
+            var menu = await _repository.GetMany(r => r.Code == code && r.Restaurant.Code == restaurantCode)
+                .Include(r => r.Dishes)
+                .FirstOrDefaultAsync();
+
+            return new DetailsResponse
+            {
+                Menu = menu
+            };
         }
     }
 }

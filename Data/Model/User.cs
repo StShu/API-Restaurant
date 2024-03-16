@@ -9,7 +9,6 @@ namespace API_Restaurant.Data.Model
         public required string Password { get; set; }
         public string? LastName { get; set; }
         public required string FirstName { get; set; }
-        public int RoleId { get; set; }
-        public Role? Role { get; set; } = null!;
+
     }
 }

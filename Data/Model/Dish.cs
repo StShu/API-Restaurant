@@ -10,6 +10,8 @@ namespace API_Restaurant.Data.Model
         public float Price { get; set; }
         public int Weight { get; set; }
         public int DishCategoryId { get; set; }
+        public int MenuId { get; set; }
+        public Menu Menu { get; set; }
         public DishCategory DishCategory { get; set; } = null!;
     }
 }
