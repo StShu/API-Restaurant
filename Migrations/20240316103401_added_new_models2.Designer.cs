@@ -3,6 +3,7 @@ using System;
 using API_Restaurant.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API_Restaurant.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240316103401_added_new_models2")]
+    partial class added_new_models2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,52 +24,6 @@ namespace API_Restaurant.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("API_Restaurant.Data.Model.Booking", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("BookingЕDateTime")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("IdPlace")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("IdUser")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("PlaceId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("PlaceId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Bookings");
-                });
 
             modelBuilder.Entity("API_Restaurant.Data.Model.Dish", b =>
                 {
@@ -134,38 +91,6 @@ namespace API_Restaurant.Migrations
                     b.ToTable("DishCategories");
                 });
 
-            modelBuilder.Entity("API_Restaurant.Data.Model.Eemployee", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("IdUser")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Eemployees");
-                });
-
             modelBuilder.Entity("API_Restaurant.Data.Model.Hall", b =>
                 {
                     b.Property<int>("Id")
@@ -194,7 +119,7 @@ namespace API_Restaurant.Migrations
                     b.ToTable("Halls");
                 });
 
-            modelBuilder.Entity("API_Restaurant.Data.Model.Menues", b =>
+            modelBuilder.Entity("API_Restaurant.Data.Model.Menu", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -347,25 +272,6 @@ namespace API_Restaurant.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("API_Restaurant.Data.Model.Booking", b =>
-                {
-                    b.HasOne("API_Restaurant.Data.Model.Place", "Place")
-                        .WithMany()
-                        .HasForeignKey("PlaceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API_Restaurant.Data.Model.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Place");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("API_Restaurant.Data.Model.Dish", b =>
                 {
                     b.HasOne("API_Restaurant.Data.Model.DishCategory", "DishCategory")
@@ -374,7 +280,7 @@ namespace API_Restaurant.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API_Restaurant.Data.Model.Menues", "Menues")
+                    b.HasOne("API_Restaurant.Data.Model.Menu", "Menu")
                         .WithMany("Dishes")
                         .HasForeignKey("MenuId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -382,26 +288,7 @@ namespace API_Restaurant.Migrations
 
                     b.Navigation("DishCategory");
 
-                    b.Navigation("Menues");
-                });
-
-            modelBuilder.Entity("API_Restaurant.Data.Model.Eemployee", b =>
-                {
-                    b.HasOne("API_Restaurant.Data.Model.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("API_Restaurant.Data.Model.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
+                    b.Navigation("Menu");
                 });
 
             modelBuilder.Entity("API_Restaurant.Data.Model.Hall", b =>
@@ -415,7 +302,7 @@ namespace API_Restaurant.Migrations
                     b.Navigation("Restaurant");
                 });
 
-            modelBuilder.Entity("API_Restaurant.Data.Model.Menues", b =>
+            modelBuilder.Entity("API_Restaurant.Data.Model.Menu", b =>
                 {
                     b.HasOne("API_Restaurant.Data.Model.Restaurant", "Restaurant")
                         .WithMany("Menues")
@@ -442,7 +329,7 @@ namespace API_Restaurant.Migrations
                     b.Navigation("Places");
                 });
 
-            modelBuilder.Entity("API_Restaurant.Data.Model.Menues", b =>
+            modelBuilder.Entity("API_Restaurant.Data.Model.Menu", b =>
                 {
                     b.Navigation("Dishes");
                 });

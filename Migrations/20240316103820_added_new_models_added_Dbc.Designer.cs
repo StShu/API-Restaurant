@@ -3,6 +3,7 @@ using System;
 using API_Restaurant.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API_Restaurant.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240316103820_added_new_models_added_Dbc")]
+    partial class added_new_models_added_Dbc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -194,7 +197,7 @@ namespace API_Restaurant.Migrations
                     b.ToTable("Halls");
                 });
 
-            modelBuilder.Entity("API_Restaurant.Data.Model.Menues", b =>
+            modelBuilder.Entity("API_Restaurant.Data.Model.Menu", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -374,7 +377,7 @@ namespace API_Restaurant.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("API_Restaurant.Data.Model.Menues", "Menues")
+                    b.HasOne("API_Restaurant.Data.Model.Menu", "Menu")
                         .WithMany("Dishes")
                         .HasForeignKey("MenuId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -382,7 +385,7 @@ namespace API_Restaurant.Migrations
 
                     b.Navigation("DishCategory");
 
-                    b.Navigation("Menues");
+                    b.Navigation("Menu");
                 });
 
             modelBuilder.Entity("API_Restaurant.Data.Model.Eemployee", b =>
@@ -415,7 +418,7 @@ namespace API_Restaurant.Migrations
                     b.Navigation("Restaurant");
                 });
 
-            modelBuilder.Entity("API_Restaurant.Data.Model.Menues", b =>
+            modelBuilder.Entity("API_Restaurant.Data.Model.Menu", b =>
                 {
                     b.HasOne("API_Restaurant.Data.Model.Restaurant", "Restaurant")
                         .WithMany("Menues")
@@ -442,7 +445,7 @@ namespace API_Restaurant.Migrations
                     b.Navigation("Places");
                 });
 
-            modelBuilder.Entity("API_Restaurant.Data.Model.Menues", b =>
+            modelBuilder.Entity("API_Restaurant.Data.Model.Menu", b =>
                 {
                     b.Navigation("Dishes");
                 });

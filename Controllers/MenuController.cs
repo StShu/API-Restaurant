@@ -27,7 +27,7 @@ namespace API_Restaurant.Controllers
 
             return new DetailsResponse
             {
-                Menu = menu
+                Menus = menu
             };
         }
     }

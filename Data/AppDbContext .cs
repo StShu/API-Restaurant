@@ -16,6 +16,7 @@ namespace API_Restaurant.Data
         public DbSet<Menu> Menues { get; set; }
         public DbSet<Place> Places { get; set; }
         public DbSet<Restaurant> Restaurants { get; set;}
-        
+        public DbSet<Eemployee> Eemployees { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
     }
 }
