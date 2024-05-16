@@ -18,5 +18,8 @@ namespace API_Restaurant.Data
         public DbSet<Restaurant> Restaurants { get; set;}
         public DbSet<Eemployee> Eemployees { get; set; }
         public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Status> Status { get; set; }
+        public DbSet<Order> Order { get; set; }
+        public DbSet<OrderItem> OrderItem { get; set; }
     }
 }

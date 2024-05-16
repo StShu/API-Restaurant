@@ -7,7 +7,6 @@ namespace API_Restaurant.Data.Model
     {
         public int TableNumber { get; set; }
         public int NumberMets { get; set; }
-        public int HallRestaurantId { get; set; }
         public Hall Hall { get; set; } = null!;
 
     }
