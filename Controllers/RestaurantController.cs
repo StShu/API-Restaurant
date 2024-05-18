@@ -37,5 +37,13 @@ namespace API_Restaurant.Controllers
                 Restaurants = await _repository.GetAll().ToArrayAsync() 
             };
         }
+        [HttpGet]
+        public async Task<ActionResult<ListResponse>> ListWithHalls()
+        {
+            return new ListResponse
+            {
+                Restaurants = await _repository.GetAll().Include(h=>h.Halls).ThenInclude(p => p.Places).ToArrayAsync()
+            };
+        }
     }
 }
